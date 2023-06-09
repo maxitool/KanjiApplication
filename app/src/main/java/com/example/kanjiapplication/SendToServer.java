@@ -14,6 +14,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.concurrent.CountDownLatch;
@@ -41,14 +42,17 @@ public class SendToServer extends Thread {
     public void run() {
         super.run();
         try {
-            InetAddress serverAddress = InetAddress.getByName(SERVER_IP);
-            Socket socket = new Socket(serverAddress, SERVER_PORT);
+            InetSocketAddress serverAddress = new InetSocketAddress(SERVER_IP, SERVER_PORT);
+            Socket socket = new Socket();
+            socket.connect(serverAddress, 10000);
             PrintStream outStream = new PrintStream(socket.getOutputStream(), true);
             DataInputStream inStream = new DataInputStream(socket.getInputStream());
             outStream.println(image + 'w');
             inStream.read(bytes);
             kanjiList = new String(bytes, "UTF-8");
             kanjiList = kanjiList.replaceAll("[\uFEFF-\uFFFF]", "");
+            outStream.println('0'); //Call to close the socket to the server
+            socket.close();
             countDownLatch.countDown();
         } catch (UnknownHostException e) {
             countDownLatch.countDown();
