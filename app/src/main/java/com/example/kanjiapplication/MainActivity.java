@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawFragment drawFragment;
     private FrameLayout frameLayout;
+    private CountDownLatch countDownLatch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
 
         public void searchKanji(View view) throws InterruptedException, IOException {
             String image = drawFragment.getImage();
+            countDownLatch = new CountDownLatch(1);
+            SendToServer sendToServer = new SendToServer(countDownLatch, image);
+            countDownLatch.await();
+            String kanjiList = sendToServer.getKanjiList();
             int a = 0;
         }
 }

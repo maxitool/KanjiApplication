@@ -218,16 +218,12 @@ public class DrawFragment extends Fragment {
                 countDownLatch = new CountDownLatch(COUNT_PROCESSORS);
             else
                 countDownLatch = new CountDownLatch(remainder);
-            for (int i = 0; i < remainder; i++) {
-                threadsList.add(new ThreadString(countDownLatch, COUNT_PROCESSORS, i, commonCountPartitionStreams + 1, normalizedImage, lengthNormImage));
+            for (int i = 0; i < COUNT_PROCESSORS - 1; i++) {
+                threadsList.add(new ThreadString(countDownLatch, i, commonCountPartitionStreams, normalizedImage, lengthNormImage, 0));
                 threadsList.get(i).start();
             }
-            if (commonCountPartitionStreams > 0)
-                for (int i = remainder; i < COUNT_PROCESSORS; i++) {
-                    threadsList.add(new ThreadString(countDownLatch, COUNT_PROCESSORS, i, commonCountPartitionStreams, normalizedImage, lengthNormImage));
-                    threadsList.get(i).start();
-                }
-            int a = 0;
+            threadsList.add(new ThreadString(countDownLatch, threadsList.size() - 1, commonCountPartitionStreams, normalizedImage, lengthNormImage, remainder));
+            threadsList.get(threadsList.size() - 1).start();
             countDownLatch.await();
             for (int i = 0; i < threadsList.size(); i++)
                 stringImage += threadsList.get(i).getLine();
