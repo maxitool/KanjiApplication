@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         drawFragment = new DrawFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, drawFragment);
@@ -35,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
                 drawFragment.setSettings(globalLocation);
             }
         });
-        }
+    }
 
-        public void searchKanji(View view) throws InterruptedException, IOException {
-            String image = drawFragment.getImage();
-            countDownLatch = new CountDownLatch(1);
-            SendToServer sendToServer = new SendToServer(countDownLatch, image);
-            countDownLatch.await();
-            String kanjiList = sendToServer.getKanjiList();
-            int a = 0;
-        }
+    public void searchKanji(View view) throws InterruptedException, IOException {
+        String image = drawFragment.getImage();
+        countDownLatch = new CountDownLatch(1);
+        SendToServer sendToServer = new SendToServer(countDownLatch, image);
+        countDownLatch.await();
+        String kanjiList = sendToServer.getKanjiList();
+        int a = 0;
+    }
 }
