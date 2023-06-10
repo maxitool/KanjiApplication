@@ -25,18 +25,18 @@ public class SendToServer extends Thread {
     private static final int SERVER_PORT = 3030;
     private CountDownLatch countDownLatch;
     private String image;
-    private String kanjiList;
+    private String listKanji;
     private byte[] bytes;
 
     public SendToServer(CountDownLatch countDownLatch, String image) {
         this.countDownLatch = countDownLatch;
         this.image = image;
-        kanjiList = "";
+        listKanji = "";
         bytes = new byte[30]; //Max length of kanji list is 10, size one kanji is 3
         this.start();
     }
 
-    public String getKanjiList() { return kanjiList; }
+    public String getKanjiList() { return listKanji; }
 
     @Override
     public void run() {
@@ -49,10 +49,10 @@ public class SendToServer extends Thread {
             DataInputStream inStream = new DataInputStream(socket.getInputStream());
             outStream.println(image + 'w');
             inStream.read(bytes);
-            kanjiList = new String(bytes, "UTF-8");
-            kanjiList = kanjiList.replaceAll("[\uFEFF-\uFFFF]", "");
             outStream.println('0'); //Call to close the socket to the server
+            listKanji = new String(bytes, "UTF-8");
             socket.close();
+            deleteNull();
             countDownLatch.countDown();
         } catch (UnknownHostException e) {
             countDownLatch.countDown();
@@ -63,4 +63,13 @@ public class SendToServer extends Thread {
         }
     }
 
+    private void deleteNull() {
+        char[] chars = listKanji.toCharArray();
+        listKanji = "";
+        for (int i = 0; i < chars.length; i++)
+            if (chars[i] != 0)
+                listKanji += chars[i];
+            else
+                break;
+    }
 }
