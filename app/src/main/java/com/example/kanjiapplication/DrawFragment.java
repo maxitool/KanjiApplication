@@ -244,6 +244,8 @@ public class DrawFragment extends Fragment {
         return stringImage;
     }
 
+    public Bitmap getBitmap() { return bitmap; }
+
     private boolean eventListener(View view, MotionEvent event) {
         if (isDrawable) {
             switch (event.getAction()) {
