@@ -44,7 +44,7 @@ public class DBKanjiInfoAccess {
     public List<TASKS> getTasksKanji(char kanji) {
         List<TASKS> tasks = new ArrayList<>();
         int iterator = 0;
-        cursor = sqLiteDatabase.rawQuery("SELECT * FROM TASKS WHERE WORD = '%" + kanji + "%'", null);
+        cursor = sqLiteDatabase.rawQuery("SELECT * FROM TASKS WHERE WORD LIKE '%" + kanji + "%'", null);
         if (cursor.moveToFirst())
             while (!cursor.isAfterLast()) {
                 tasks.add(new TASKS());

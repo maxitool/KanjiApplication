@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,11 +41,10 @@ public class InformationActivity extends AppCompatActivity {
         listKanji = _listKanji.toCharArray();
         dbKanjiInfoAccess = new DBKanjiInfoAccess(this);
         previousButton = findViewById(R.id.previousButton);
-        previousButton.setEnabled(false);
+        previousButton.setVisibility(View.GONE);
         nextButton = findViewById(R.id.nextButton);
-        if (pointer == maxPointer) {
-            nextButton.setEnabled(false);
-        }
+        if (pointer == maxPointer)
+            nextButton.setVisibility(View.GONE);
         reading = findViewById(R.id.reading);
         meaning = findViewById(R.id.meaning);
         imageKanji = findViewById(R.id.imageKanji);
@@ -67,9 +67,9 @@ public class InformationActivity extends AppCompatActivity {
         if (pointer < maxPointer) {
             pointer++;
             if (pointer == maxPointer)
-                nextButton.setEnabled(false);
+                nextButton.setVisibility(View.GONE);
             if (!previousButton.isEnabled())
-                previousButton.setEnabled(true);
+                previousButton.setVisibility(View.VISIBLE);
             getInfoFromBD();
             reDraw();
         }
@@ -78,9 +78,9 @@ public class InformationActivity extends AppCompatActivity {
         if (pointer > 0) {
             pointer--;
             if (pointer == 0)
-                previousButton.setEnabled(false);
+                previousButton.setVisibility(View.GONE);
             if (!nextButton.isEnabled())
-                nextButton.setEnabled(true);
+                nextButton.setVisibility(View.VISIBLE);
             getInfoFromBD();
             reDraw();
         }
