@@ -3,19 +3,24 @@ package com.example.kanjiapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kanjiapplication.databases.DBKanjiInfoAccess;
 import com.example.kanjiapplication.databases.tables.INFO;
 import com.example.kanjiapplication.databases.tables.TASKS;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class InformationActivity extends AppCompatActivity {
 
     private ImageButton previousButton, nextButton;
+    private ImageView imageKanji;
     private TextView reading, meaning;
     private char[] listKanji;
     private int pointer;
@@ -41,11 +46,13 @@ public class InformationActivity extends AppCompatActivity {
             nextButton.setEnabled(false);
         reading = findViewById(R.id.reading);
         meaning = findViewById(R.id.meaning);
+        imageKanji = findViewById(R.id.imageKanji);
         getInfoFromBD();
         reDraw();
     }
 
     private void reDraw() {
+        imageKanji.setImageResource(this.getResources().getIdentifier("i1.png", "drawable", this.getPackageName()));
         reading.setText(info.READING);
         meaning.setText(info.MEANING);
     }
