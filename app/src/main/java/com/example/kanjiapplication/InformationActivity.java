@@ -42,8 +42,9 @@ public class InformationActivity extends AppCompatActivity {
         previousButton = findViewById(R.id.previousButton);
         previousButton.setEnabled(false);
         nextButton = findViewById(R.id.nextButton);
-        if (pointer == maxPointer)
+        if (pointer == maxPointer) {
             nextButton.setEnabled(false);
+        }
         reading = findViewById(R.id.reading);
         meaning = findViewById(R.id.meaning);
         imageKanji = findViewById(R.id.imageKanji);
@@ -52,7 +53,7 @@ public class InformationActivity extends AppCompatActivity {
     }
 
     private void reDraw() {
-        imageKanji.setImageResource(this.getResources().getIdentifier("i1.png", "drawable", this.getPackageName()));
+        imageKanji.setImageResource(this.getResources().getIdentifier("i1", "drawable", this.getPackageName()));
         reading.setText(info.READING);
         meaning.setText(info.MEANING);
     }
