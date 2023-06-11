@@ -52,6 +52,7 @@ public class DBKanjiInfoAccess {
                 tasks.get(iterator).FURIGANA = cursor.getString(1);
                 tasks.get(iterator).ROMAJI = cursor.getString(2);
                 tasks.get(iterator).TRANSLATION = cursor.getString(3);
+                tasks.get(iterator).GROUP = cursor.getString(4);
                 cursor.moveToNext();
                 iterator++;
             }
