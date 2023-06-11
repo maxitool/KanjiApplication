@@ -45,13 +45,13 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
 
-        _taskNumberTextView = findViewById(R.id.taskNumberTextView);
-        _taskNumberTextView.setEnabled(false);
-        _taskNumberTextView.setText(String.format(Locale.US,"Task: %d", _taskNumber));
+        //_taskNumberTextView = findViewById(R.id.taskNumberTextView);
+        //_taskNumberTextView.setEnabled(false);
+        //_taskNumberTextView.setText(String.format(Locale.US,"Task: %d", _taskNumber));
 
-        _symbolsTextView = findViewById(R.id.symbolsTextView);
-        _symbolsTextView.setEnabled(false);
-        _symbolsTextView.setText(_symbols);
+        //_symbolsTextView = findViewById(R.id.symbolsTextView);
+        //_symbolsTextView.setEnabled(false);
+        //_symbolsTextView.setText(_symbols);
     }
 
     public void check (View view) {

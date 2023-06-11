@@ -44,7 +44,7 @@ public class DBKanjiInfoAccess {
     public List<TASKS> getTasksKanji(char kanji) {
         List<TASKS> tasks = new ArrayList<>();
         int iterator = 0;
-        cursor = sqLiteDatabase.rawQuery("SELECT * FROM TASKS WHERE WORD LIKE '%" + kanji + "%'  ORDER BY GROUP DESC", null);
+        cursor = sqLiteDatabase.rawQuery("SELECT * FROM TASKS WHERE WORD LIKE '%" + kanji + "%' ORDER BY GROUP_KANJI", null);
         if (cursor.moveToFirst())
             while (!cursor.isAfterLast()) {
                 tasks.add(new TASKS());
@@ -52,7 +52,7 @@ public class DBKanjiInfoAccess {
                 tasks.get(iterator).FURIGANA = cursor.getString(1);
                 tasks.get(iterator).ROMAJI = cursor.getString(2);
                 tasks.get(iterator).TRANSLATION = cursor.getString(3);
-                tasks.get(iterator).GROUP = cursor.getString(4);
+                tasks.get(iterator).GROUP_KANJI = cursor.getString(4);
                 cursor.moveToNext();
                 iterator++;
             }

@@ -5,5 +5,5 @@ public class TASKS {
     public String FURIGANA;
     public String ROMAJI;
     public String TRANSLATION;
-    public String GROUP;
+    public String GROUP_KANJI;
 }
