@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/groupMenu">
+
+        <item
+            android:id="@+id/menuSearch"
+            android:icon="@drawable/ic_baseline_search_24"
+            android:title="Поиск">
+        </item>
+
+        <item
+            android:id="@+id/menuLevel1"
+            android:icon="@drawable/ic_baseline_school_24"
+            android:title="Уровень 1">
+        </item>
+
+        <item
+            android:id="@+id/menuLevel2"
+            android:icon="@drawable/ic_baseline_school_24"
+            android:title="Уровень 2">
+        </item>
+
+        <item
+            android:id="@+id/menuLevel3"
+            android:icon="@drawable/ic_baseline_school_24"
+            android:title="Уровень 3">
+        </item>
+
+        <item
+            android:id="@+id/menuOwnGroups"
+            android:icon="@drawable/ic_baseline_window_24"
+            android:title="Мои группы">
+        </item>
+
+    </group>
+
+</menu>

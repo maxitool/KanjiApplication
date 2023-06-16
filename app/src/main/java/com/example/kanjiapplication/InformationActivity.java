@@ -5,8 +5,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -21,8 +24,10 @@ import com.example.kanjiapplication.databases.tables.TASKS;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,7 +77,8 @@ public class InformationActivity extends AppCompatActivity {
 
     private void reDraw() {
         linearLayoutInfo.removeAllViews();
-        imageKanji.setImageResource(this.getResources().getIdentifier("i1", "kanji_images", this.getPackageName()));
+        String f = getPackageCodePath();
+        imageKanji.setImageResource(this.getResources().getIdentifier('i' + Integer.toString(info.ID), "drawable", getPackageName()));
         reading.setText(info.READING);
         meaning.setText(info.MEANING);
         numberGroup = 0;
@@ -90,7 +96,8 @@ public class InformationActivity extends AppCompatActivity {
             }
             blockTasks.add(listTasks.get(i));
         }
-        addBlock(listTasks.size() - 1);
+        if (listTasks.size() != 0)
+            addBlock(listTasks.size() - 1);
     }
 
     private void addBlock(int id) {
