@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.kanjiapplication.databases.tables.GROUPS;
 import com.example.kanjiapplication.databases.tables.INFO;
 import com.example.kanjiapplication.databases.tables.TASKS;
 
@@ -32,13 +33,29 @@ public class DBKanjiInfoAccess {
         cursor = sqLiteDatabase.rawQuery("SELECT * FROM INFO WHERE KANJI = '" + kanji + "'", null);
         if (cursor.moveToFirst())
             while (!cursor.isAfterLast()) {
-                info.KANJI = cursor.getString(0);
-                info.READING = cursor.getString(1);
-                info.MEANING = cursor.getString(2);
+                info.ID = Integer.parseInt(cursor.getString(0));
+                info.KANJI = cursor.getString(1);
+                info.READING = cursor.getString(2);
+                info.MEANING = cursor.getString(3);
                 cursor.moveToNext();
             }
         cursor.close();
         return info;
+    }
+
+    public int[] getIDsKanji(char[] listKanji, int countKanji) {
+        int count;
+        if (listKanji.length < countKanji)
+            count = listKanji.length;
+        else
+            count = countKanji;
+        int[] ids = new int[count];
+        for (int i = 0; i < count; i++) {
+            cursor = sqLiteDatabase.rawQuery("SELECT ID FROM INFO WHERE KANJI = '" + listKanji[i] + "'", null);
+            if (cursor.moveToFirst())
+                ids[i] = Integer.parseInt(cursor.getString(0));
+        }
+        return ids;
     }
 
     public List<TASKS> getTasksKanji(char kanji) {
@@ -58,5 +75,22 @@ public class DBKanjiInfoAccess {
             }
         cursor.close();
         return tasks;
+    }
+
+    public List<GROUPS> getGroups(String level) {
+        List<GROUPS> groups = new ArrayList<>();
+        int iterator = 0;
+        cursor = sqLiteDatabase.rawQuery("SELECT * FROM MAIN_GROUPS WHERE LEVEL = " + level, null);
+        if (cursor.moveToFirst())
+            while (!cursor.isAfterLast()) {
+                groups.add(new GROUPS());
+                groups.get(iterator).ID = Integer.parseInt(cursor.getString(0));
+                groups.get(iterator).NAME = cursor.getString(2);
+                groups.get(iterator).LIST_KANJI = cursor.getString(3);
+                cursor.moveToNext();
+                iterator++;
+            }
+        cursor.close();
+        return groups;
     }
 }

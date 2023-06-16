@@ -9,4 +9,6 @@
     <string name="back_button_text">Back</string>
     <string name="check_button_text">Check</string>
     <string name="next_button_text">Next</string>
+    <string name="search_kanji">Search</string>
+    <string name="clear_panel">Clear</string>
 </resources>

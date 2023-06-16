@@ -1,68 +1,98 @@
 package com.example.kanjiapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import java.util.Locale;
+import com.example.kanjiapplication.databases.tables.TASKS;
+import java.util.Objects;
 
 public class TaskActivity extends AppCompatActivity {
 
-    private int _taskNumber = -228;
-    private String _symbols = "Please, input the symbols";
-    private String _rightAnswer = "Please, input the right answer";
-    private TextView _taskNumberTextView;
-    private TextView _symbolsTextView;
-
-    public void set_taskNumber (int taskNumber) {
-        _taskNumber = taskNumber;
+    public enum TaskResult {
+        Correct,
+        Incorrect,
+        Unknown
     }
 
-    public void set_symbols (String symbols) {
-        _symbols = symbols;
+    private TaskResult _result = TaskResult.Unknown;
+    private TASKS _task;
+    private String _answer;
+    private TextView _tvWord, _tvFurigana, _tvRomanji, _tvTranslation;
+    private Button _bCheck, _bNext, _bBack;
+    private FrameLayout _frameLayoutTask;
+    private DrawFragment _drawFragment;
+    private char[] _listKanji;
+
+    public void setTask (TASKS task) {
+        _task = task;
+
+        _tvWord.setText(_task.WORD);
+        _tvFurigana.setText(_task.FURIGANA);
+        _tvRomanji.setText(_task.ROMAJI);
+        _tvTranslation.setText(_task.TRANSLATION);
     }
 
-    public void set_rightAnswer (String rightAnswer) {
-        _rightAnswer = rightAnswer;
+    public TaskResult getResult () {
+        return _result;
     }
 
-    public int get_taskNumber () {
-        return  _taskNumber;
+    public void setAnswer (String answer) {
+        _answer = answer;
     }
 
-    public String get_symbols () {
-        return _symbols;
+    public TASKS getTask () {
+        return _task;
     }
 
-    public String get_rightAnswer () {
-        return _rightAnswer;
+    public String getAnswer () {
+        return _answer;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
+        Intent intent = getIntent();
+        String listKanji = (String)intent.getSerializableExtra("listKanji");
+        _listKanji = listKanji.toCharArray();
+        _tvWord = findViewById(R.id.textViewWord);
+        _tvFurigana = findViewById(R.id.textViewFurigana);
+        _tvRomanji = findViewById(R.id.textViewRomanji);
+        _tvTranslation = findViewById(R.id.textViewTranslation);
+        _frameLayoutTask = findViewById(R.id.frameLayoutTask);
+        _drawFragment = new DrawFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayoutTask, _drawFragment);
+        fragmentTransaction.commit();
 
-        //_taskNumberTextView = findViewById(R.id.taskNumberTextView);
-        //_taskNumberTextView.setEnabled(false);
-        //_taskNumberTextView.setText(String.format(Locale.US,"Task: %d", _taskNumber));
+        _bCheck = findViewById(R.id.buttonCheck);
+        _bCheck.setOnClickListener(view -> { // TODO: On check button clicked listener
+            String printed = "";
 
-        //_symbolsTextView = findViewById(R.id.symbolsTextView);
-        //_symbolsTextView.setEnabled(false);
-        //_symbolsTextView.setText(_symbols);
-    }
+            try {
+                // TODO: Отправка и получение файлов с сервера
+                _result = Objects.equals(printed, _answer) ? TaskResult.Correct : TaskResult.Incorrect;
+                _bNext.setEnabled(true);
+            }
+            catch (Exception e) {
+                _bNext.setEnabled(false);
+            }
+        });
 
-    public void check (View view) {
-        // TODO: check is drawing the right answer
-    }
+        _bNext = findViewById(R.id.buttonNext);
+        _bNext.setOnClickListener(view -> { // TODO: On next button clicked listener
 
-    public void back (View view) {
+        });
 
-    }
+        _bBack = findViewById(R.id.buttonBack);
+        _bBack.setOnClickListener(view -> { // TODO: On back button clicked listener
 
-    public void Next (View view) {
-
+        });
     }
 }

@@ -55,7 +55,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:onClick="clearCanvas"
-                android:text="Button" />
+                android:text="Clear" />
 
         </LinearLayout>
 

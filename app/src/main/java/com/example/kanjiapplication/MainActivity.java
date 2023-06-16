@@ -44,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void searchKanji(View view) throws InterruptedException, IOException {
         String image = drawFragment.getImage();
+        if (image== "") {
+            Toast.makeText(this, "Paint panel is empty", Toast.LENGTH_LONG).show();
+            return;
+        }
         AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle("From robot").setMessage("Sending a hieroglyph to the server...").show();
         countDownLatch = new CountDownLatch(1);
         SendToServer sendToServer = new SendToServer(countDownLatch, image);

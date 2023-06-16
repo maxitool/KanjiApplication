@@ -20,7 +20,7 @@
             <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:layout_width="150dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/light_blue_900"
                     android:text="Word"
@@ -29,8 +29,9 @@
 
                 <TextView
                     android:id="@+id/textViewWord"
-                    android:layout_width="wrap_content"
+                    android:layout_width="219dp"
                     android:layout_height="wrap_content"
+                    android:text="いり口"
                     android:textColor="@color/light_blue_600"
                     android:textSize="24sp" />
 
@@ -39,7 +40,7 @@
             <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:layout_width="150dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:text="Furigana"
                     android:textAllCaps="true"
@@ -50,6 +51,7 @@
                     android:id="@+id/textViewFurigana"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="いりぐち"
                     android:textColor="@color/light_blue_600"
                     android:textSize="24sp" />
 
@@ -58,7 +60,7 @@
             <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
-                    android:layout_width="150dp"
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:text="Romanji"
                     android:textAllCaps="true"
@@ -67,10 +69,31 @@
 
                 <TextView
                     android:id="@+id/textViewRomanji"
+                    android:layout_width="134dp"
+                    android:layout_height="wrap_content"
+                    android:text="iriguchi"
+                    android:textColor="@color/light_blue_600"
+                    android:textSize="24sp" />
+
+            </TableRow>
+
+            <TableRow android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="177dp"
+                    android:layout_height="wrap_content"
+                    android:text="Translation"
+                    android:textAllCaps="true"
+                    android:textColor="@color/light_blue_900"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/textViewTranslation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/light_blue_600"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    tools:text="вход" />
 
             </TableRow>
 
@@ -84,7 +107,7 @@
                 android:layout_marginBottom="10dp" />
 
             <FrameLayout
-                android:id="@+id/frameLayout"
+                android:id="@+id/frameLayoutTask"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
                 android:background="@color/cardview_shadow_end_color"/>

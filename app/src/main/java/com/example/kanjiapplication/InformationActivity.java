@@ -72,7 +72,7 @@ public class InformationActivity extends AppCompatActivity {
 
     private void reDraw() {
         linearLayoutInfo.removeAllViews();
-        imageKanji.setImageResource(this.getResources().getIdentifier("i1", "drawable", this.getPackageName()));
+        imageKanji.setImageResource(this.getResources().getIdentifier("i1", "kanji_images", this.getPackageName()));
         reading.setText(info.READING);
         meaning.setText(info.MEANING);
         numberGroup = 0;
