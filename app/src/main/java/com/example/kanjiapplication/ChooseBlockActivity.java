@@ -38,7 +38,7 @@ public class ChooseBlockActivity extends AppCompatActivity {
         dbKanjiInfoAccess = new DBKanjiInfoAccess(this);
         listGroups = dbKanjiInfoAccess.getGroups(level);
         setImagesFragments();
-        if (level == "Own") {
+        if (level.equals("Own")) {
             Button button = new Button(this);
             button.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             button.setText("Добавить");

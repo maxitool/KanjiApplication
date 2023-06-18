@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TaskActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:background="@color/my_green">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +33,6 @@
                     android:layout_width="219dp"
                     android:layout_height="wrap_content"
                     android:text="いり口"
-                    android:textColor="@color/light_blue_600"
                     android:textSize="24sp" />
 
             </TableRow>
@@ -52,7 +52,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="いりぐち"
-                    android:textColor="@color/light_blue_600"
                     android:textSize="24sp" />
 
             </TableRow>
@@ -72,7 +71,6 @@
                     android:layout_width="134dp"
                     android:layout_height="wrap_content"
                     android:text="iriguchi"
-                    android:textColor="@color/light_blue_600"
                     android:textSize="24sp" />
 
             </TableRow>
@@ -91,16 +89,15 @@
                     android:id="@+id/textViewTranslation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/light_blue_600"
                     android:textSize="24sp"
-                    tools:text="вход" />
+                    android:text="вход" />
 
             </TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/light_blue_A200"
+                android:textColor="@color/light_blue_900"
                 android:text="Draw the kanji"
                 android:textAlignment="center"
                 android:textSize="16sp"
@@ -109,7 +106,7 @@
             <FrameLayout
                 android:id="@+id/frameLayoutTask"
                 android:layout_width="match_parent"
-                android:layout_height="330dp"
+                android:layout_height="420dp"
                 android:background="@color/cardview_shadow_end_color"/>
 
         </TableLayout>

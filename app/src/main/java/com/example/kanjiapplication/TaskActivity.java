@@ -20,38 +20,39 @@ public class TaskActivity extends AppCompatActivity {
         Unknown
     }
 
-    private TaskResult _result = TaskResult.Unknown;
-    private TASKS _task;
-    private String _answer;
-    private TextView _tvWord, _tvFurigana, _tvRomanji, _tvTranslation;
-    private Button _bCheck, _bNext, _bBack;
-    private FrameLayout _frameLayoutTask;
-    private DrawFragment _drawFragment;
-    private char[] _listKanji;
+    private TaskResult result = TaskResult.Unknown;
+    private TASKS task;
+    private String answer;
+    private TextView tvWord, tvFurigana, tvRomanji, tvTranslation;
+    private Button bCheck, bNext, bBack;
+    private FrameLayout frameLayoutTask;
+    private DrawFragment drawFragment;
+    private char[] listKanji;
+    private FrameLayout frameLayout;
 
     public void setTask (TASKS task) {
-        _task = task;
+        task = task;
 
-        _tvWord.setText(_task.WORD);
-        _tvFurigana.setText(_task.FURIGANA);
-        _tvRomanji.setText(_task.ROMAJI);
-        _tvTranslation.setText(_task.TRANSLATION);
+        tvWord.setText(task.WORD);
+        tvFurigana.setText(task.FURIGANA);
+        tvRomanji.setText(task.ROMAJI);
+        //tvTranslation.setText(task.TRANSLATION);
     }
 
     public TaskResult getResult () {
-        return _result;
+        return result;
     }
 
     public void setAnswer (String answer) {
-        _answer = answer;
+        this.answer = tvTranslation.getText().toString();
     }
 
     public TASKS getTask () {
-        return _task;
+        return task;
     }
 
     public String getAnswer () {
-        return _answer;
+        return answer;
     }
 
     @Override
@@ -59,40 +60,47 @@ public class TaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         Intent intent = getIntent();
-        String listKanji = (String)intent.getSerializableExtra("listKanji");
-        _listKanji = listKanji.toCharArray();
-        _tvWord = findViewById(R.id.textViewWord);
-        _tvFurigana = findViewById(R.id.textViewFurigana);
-        _tvRomanji = findViewById(R.id.textViewRomanji);
-        _tvTranslation = findViewById(R.id.textViewTranslation);
-        _frameLayoutTask = findViewById(R.id.frameLayoutTask);
-        _drawFragment = new DrawFragment();
+        String _listKanji = (String)intent.getSerializableExtra("listKanji");
+        listKanji = _listKanji.toCharArray();
+        tvWord = findViewById(R.id.textViewWord);
+        tvFurigana = findViewById(R.id.textViewFurigana);
+        tvRomanji = findViewById(R.id.textViewRomanji);
+        tvTranslation = findViewById(R.id.textViewTranslation);
+        frameLayoutTask = findViewById(R.id.frameLayoutTask);
+        drawFragment = new DrawFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayoutTask, _drawFragment);
+        fragmentTransaction.replace(R.id.frameLayoutTask, drawFragment);
         fragmentTransaction.commit();
 
-        _bCheck = findViewById(R.id.buttonCheck);
-        _bCheck.setOnClickListener(view -> { // TODO: On check button clicked listener
+        bCheck = findViewById(R.id.buttonCheck);
+        bCheck.setOnClickListener(view -> { // TODO: On check button clicked listener
             String printed = "";
 
             try {
                 // TODO: Отправка и получение файлов с сервера
-                _result = Objects.equals(printed, _answer) ? TaskResult.Correct : TaskResult.Incorrect;
-                _bNext.setEnabled(true);
+                result = Objects.equals(printed, answer) ? TaskResult.Correct : TaskResult.Incorrect;
+                bNext.setEnabled(true);
             }
             catch (Exception e) {
-                _bNext.setEnabled(false);
+                bNext.setEnabled(false);
             }
         });
 
-        _bNext = findViewById(R.id.buttonNext);
-        _bNext.setOnClickListener(view -> { // TODO: On next button clicked listener
+        bNext = findViewById(R.id.buttonNext);
+        bNext.setOnClickListener(view -> { // TODO: On next button clicked listener
 
         });
 
-        _bBack = findViewById(R.id.buttonBack);
-        _bBack.setOnClickListener(view -> { // TODO: On back button clicked listener
+        bBack = findViewById(R.id.buttonBack);
+        bBack.setOnClickListener(view -> { // TODO: On back button clicked listener
 
+        });
+
+        frameLayout = findViewById(R.id.frameLayoutTask);
+        frameLayout.post(() -> {
+            int[] globalLocation = new int[2];
+            frameLayout.getLocationOnScreen(globalLocation);
+            drawFragment.setSettings(globalLocation);
         });
     }
 }
