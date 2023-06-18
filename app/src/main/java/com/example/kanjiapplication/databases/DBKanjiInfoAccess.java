@@ -80,7 +80,7 @@ public class DBKanjiInfoAccess {
     public List<GROUPS> getGroups(String level) {
         List<GROUPS> groups = new ArrayList<>();
         int iterator = 0;
-        cursor = sqLiteDatabase.rawQuery("SELECT * FROM MAIN_GROUPS WHERE LEVEL = " + level, null);
+        cursor = sqLiteDatabase.rawQuery("SELECT * FROM MAIN_GROUPS WHERE LEVEL = '" + level + "' ORDER BY ID", null);
         if (cursor.moveToFirst())
             while (!cursor.isAfterLast()) {
                 groups.add(new GROUPS());

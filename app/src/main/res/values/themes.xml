@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="Theme.KanjiApplication.Fullscreen" parent="Theme.KanjiApplication">
         <item name="android:actionBarStyle">
             @style/Widget.Theme.KanjiApplication.ActionBar.Fullscreen
@@ -25,4 +26,13 @@
         <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
+
+    <style name="Theme.KanjiApplication.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.KanjiApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.KanjiApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -45,7 +45,7 @@ public class ImageBlockFragment extends Fragment {
         images[3] = view.findViewById(R.id.imageKanji4);
         for (int i = 0; i < COUNT_IMAGES; i++)
             images[i].setImageResource(this.getResources().getIdentifier('i' + Integer.toString(ids[i]), "drawable", getActivity().getPackageName()));
-        relativeLayouImages = view.findViewById(R.id.relativeLayouImages);
+        relativeLayouImages = view.findViewById(R.id.relativeLayoutImages);
         relativeLayouImages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

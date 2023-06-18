@@ -1,5 +1,5 @@
 <resources>
-    <style name="Widget.Theme.KanjiApplication.ActionBar.Fullscreen" parent="Widget.AppCompat.ActionBar">
+    <style name="Widget.Theme.KanjiApplication.ActionBar.Fullscreen" parent="Theme.Design.NoActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
 

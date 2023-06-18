@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -37,6 +38,12 @@ public class ChooseBlockActivity extends AppCompatActivity {
         dbKanjiInfoAccess = new DBKanjiInfoAccess(this);
         listGroups = dbKanjiInfoAccess.getGroups(level);
         setImagesFragments();
+        if (level == "Own") {
+            Button button = new Button(this);
+            button.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            button.setText("Добавить");
+            linearLayoutBlocks.addView(button);
+        }
     }
 
     private void setImagesFragments() {
@@ -45,7 +52,7 @@ public class ChooseBlockActivity extends AppCompatActivity {
         int count;
         for (int i = 0; i < countRows; i++) {
             llPointer = new LinearLayout(this);
-            llPointer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            llPointer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.VERTICAL));
             linearLayoutBlocks.addView(llPointer);
             if (countGroups > COUNT_GROUPS_IN_ROW)
                 count = COUNT_GROUPS_IN_ROW;
@@ -61,6 +68,7 @@ public class ChooseBlockActivity extends AppCompatActivity {
                 fm.replace(i * COUNT_GROUPS_IN_ROW + j + 1, imageBlockFragment);
                 fm.commit();
             }
+            countGroups  -= COUNT_GROUPS_IN_ROW;
         }
     }
 }
